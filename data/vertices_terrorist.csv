@@ -1,0 +1,9 @@
+person:ID,name,known_terrorist:int,:LABEL
+1,Alice,1,Person
+2,Bob,0,Person
+3,Charlie,0,Person
+4,David,0,Person
+5,Esther,0,Person
+6,Fanny,0,Person
+7,Gabby,0,Person
+8,Terrorist,1,Person

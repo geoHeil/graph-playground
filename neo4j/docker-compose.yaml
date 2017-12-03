@@ -1,0 +1,11 @@
+version: '3'
+services:
+  graph:
+    build:
+      context: .
+    container_name: neo4j
+    volumes:
+      - ../data:/data_network/
+    ports:
+      - "7474:7474"
+      - "7687:7687"
