@@ -83,12 +83,22 @@ which leads to the graph being processes multiple times:
 Additionally, to get all the different fraudulence results as columns for each vertex a pivot table would be required.
 
 ```
-MATCH p = (source:Person)    
-OPTIONAL MATCH (source)--(destination:Person)
-OPTIONAL MATCH (source)-[*1..3]-(destination:Person)
-RETURN source.name, source.known_terrorist, avg(destination.known_terrorist) as undir_1_any
-    ,avg(p.destination.known_terrorist) as single
+MATCH p = (source:Person)-[:call|text]-(destination:Person)
+RETURN 
+  source.name as Vertex, 
+  source.known_terrorist as known_terrorist,
+  apoc.coll.avg(COLLECT(
+    CASE WHEN ALL(r in relationships(p) where type(r)='call') THEN destination.known_terrorist ELSE NULL END
+  )) as type_undir_1_call,
+  apoc.coll.avg(COLLECT(
+    CASE WHEN ALL(r in relationships(p) where type(r)='text') THEN destination.known_terrorist ELSE NULL END
+  )) as type_undir_1_text,
+  apoc.coll.avg(COLLECT(
+    destination.known_terrorist
+  )) as type_undir_1_any
 ```
+
+the query plan now is more efficient - but so far only 3 out of all the other combinations have been computed. A python script which loops over all the combinations of parameters could be used to query the desired relations - and I belive that this would be more maintainable (but probably less efficient).
 
 ## stopping the db
 
