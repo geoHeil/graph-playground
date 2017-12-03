@@ -1,1 +1,6 @@
 .ipynb_checkpoints
+spark-graphframes/.idea
+spark-graphframes/project/project
+spark-graphframes/project/target
+spark-graphframes/target
+spark-graphframes/dummyCheckpoint
