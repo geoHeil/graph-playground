@@ -18,6 +18,8 @@ Vertex | FraudulenceNetwork | OwnFraudulence | type_Fraudulence
 ```
 
 ## answering the queries
+look into the subfolders.
+
 ### neo4j
 See the folder [neo4j](neo4j) for details.
 In general, it works very well, but manually creating the statements can be error prone. Therefore python can be used to chain together the different queries.
